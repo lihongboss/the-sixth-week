@@ -87,6 +87,7 @@
                     };
                     document.onmouseup = function(){
                         document.onmousemove = null;
+                        document.onmouseup = null;
                         if(nearElem){
                             animate(elem,nearElem.position);
                             animate(nearElem,elem.position);
