@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>案例1</title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            ul,ol{
+                list-style:none;
+            }
+            #container{
+                width:400px;
+                margin:100px auto;
+            }
+            #big-box{
+                width:400px;
+                height:320px;
+                position:relative;
+            }
+            #big-img li{
+                width:400px;
+                position:absolute;
+                height:320px;
+                overflow: hidden;
+            }
+            #next,#prev{
+                height:320px;
+                width:200px;
+                position:absolute;
+                opacity:0;
+                filter:alpha(opacity=0);
+                z-index:99999;
+            }
+            #prev{
+                left:0;
+                top:0;
+            }
+            #next{
+                top:0;
+                right:0;
+            }
+            #prev-btn,#next-btn{
+                position:absolute;
+                height:60px;
+                width:60px;
+                top:50%;
+                margin-top:-30px;
+                background-image:url("img/btn.gif");
+            }
+            #prev-btn{
+                left:10px;
+            }
+            #next-btn{
+                right:10px;
+                background-position: 0 -60px;
+            }
+            #txt {
+                height: 30px;
+                width: 400px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                z-index:99999;
+            }
+            #text,#num{
+                line-height:30px;
+                color:#ffffff;
+
+            }
+            #text{
+                float:left;
+            }
+            #num{
+                float:right;
+            }
+            #small-box{
+               width:400px;
+                background-color: darkgray;
+                height:114px;
+                overflow: hidden;
+            }
+            #small-img{
+                width:800px;
+                height:94px;
+                float:left;
+            }
+            #small-img li{
+                float:left;
+                width:120px;
+                height:94px;
+                line-height:94px;
+                margin-left:10px;
+                margin-top: 10px;
+            }
+            #small-img img{
+                width:120px;
+                height:94px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="big-box">
+                <ul id="big-img">
+                    <li style="z-index:1"><img src="img/1.bmp" alt=""/></li>
+                    <li><img src="img/2.bmp" alt=""/></li>
+                    <li><img src="img/3.bmp" alt=""/></li>
+                    <li><img src="img/4.bmp" alt=""/></li>
+                    <li><img src="img/5.bmp" alt=""/></li>
+                    <li><img src="img/6.bmp" alt=""/></li>
+                </ul>
+                    <div id="prev">
+                        <span id="prev-btn"></span>
+                    </div>
+                    <div id="next">
+                        <span id="next-btn"></span>
+                    </div>
+                    <div id="txt">
+                        <span id="text">hhhhh</span>
+                        <div id="num">
+                            <span id="i-num">1</span>
+                            <span>/6</span>
+                        </div>
+                    </div>
+            </div>
+            <div id="small-box">
+                <ul id="small-img">
+                    <li><img src="img/1.bmp" alt="欲望都市"/></li>
+                    <li><img src="img/2.bmp" alt="古色古香"/></li>
+                    <li><img src="img/3.bmp" alt="灵魂舞者"/></li>
+                    <li><img src="img/4.bmp" alt="酷炫跑车"/></li>
+                    <li><img src="img/5.bmp" alt="暗黑精灵"/></li>
+                    <li><img src="img/6.bmp" alt="五光十色"/></li>
+                </ul>
+            </div>
+        </div>
+        <script src="jsl.js"></script>
+        <script>
+            var oPrev = document.getElementById("prev");
+            var oNext = document.getElementById("next");
+            var oPrevBtn = document.getElementById("prev-btn");
+            var oNextBtn = document.getElementById("next-btn");
+            var oBigImg = document.getElementById("big-img");
+            var aLi = oBigImg.getElementsByTagName("li");
+            var oText = document.getElementById("text");
+            var oNum = document.getElementById("num");
+            var oINum = document.getElementById("i-num");
+            var iNow=0;
+            var zIndex=1;
+            oText.
+            oPrev.onmouseover = oNext.onmouseover = function(){
+                animate(this,{opacity:100});
+            };
+            oPrev.onmouseout = oNext.onmouseout = function(){
+                animate(this,{opacity:0});
+            };
+            function changeImg(index){
+                    aLi[index].style.zIndex = zIndex++;
+                    aLi[index].style.height = 0;
+                    animate(aLi[index], {height: 320});
+
+            };
+            oPrevBtn.onclick = function(){
+                iNow--;
+                if(iNow == -1 ){
+                    iNow = aLi.length - 1;
+                }
+                changeImg(iNow);
+            };
+            oNextBtn.onclick = function(){
+                iNow++;
+                if(iNow == aLi.length){
+                    iNow = 0;
+                }
+                changeImg(iNow);
+            };
+        </script>
+    </body>
+</html>
