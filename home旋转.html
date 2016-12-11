@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            #container{
+                height: 50px;
+                width: 50px;
+                position:fixed;
+                bottom:20px;
+                right:20px;
+            }
+            #container img{
+                height: 50px;
+                width: 50px;
+                position:absolute;
+                left:0;
+                right:0;
+                -webkit-transition:transform 1s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <img  class="one"  src="img3/2.png" alt=""/>
+            <img class="one" src="img3/1.png" alt=""/>
+            <img class="one" src="img3/4.png" alt=""/>
+            <img  class="one" src="img3/5.png" alt=""/>
+            <img  class="one" src="img3/6.png" alt=""/>
+            <img  class="one" id="home" src="img3/3.png" alt=""/>
+        </div>
+        <script>
+            var oContainer = document.getElementById("container");
+            var oHome = document.getElementById("home");
+            var aImg = oContainer.getElementsByClassName("one");
+            var bFlag = false;
+            oHome.onclick = function(){
+                if(!bFlag){
+                    for(var i=0;i<aImg.length;i++){
+                        var x = -180*Math.sin(22.5*i*Math.PI/180);
+                        var y = -180*Math.cos(22.5*i*Math.PI/180);
+                        aImg[i].style.WebkitTransform = "translate("+x+"px,"+y+"px) rotate(360deg)";
+                    }
+                    this.style.WebkitTransform = "rotate(360deg)";
+                    bFlag = true;
+                }else{
+                    for(var i=0;i<aImg.length;i++) {
+                        aImg[i].style.WebkitTransform = "translate(0px,0px) rotate(0deg)";
+                    }
+                    this.style.WebkitTransform = "rotate(0deg)";
+                    bFlag = false;
+                }
+
+            };
+        </script>
+    </body>
+</html>
